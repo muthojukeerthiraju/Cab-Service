@@ -1,0 +1,98 @@
+
+
+
+
+{% extends 'core/base_Booking.html' %}
+
+{% block title %}
+Completed Bookings
+{% endblock %}
+
+{% block content %}
+
+
+<br><br><br>
+
+<div class="text-center">
+  <h1>Completed Bookings</h1>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="container ">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message|safe }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+
+<br><br>
+<div class="col-lg-12 text-center" style='padding-left: 50px;padding-right: 50px; '>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="card-group ">
+        <!-- <div class="col-md-4"> -->
+
+  {%if object_list%}
+        {% for Booking in object_list %}
+
+        <div class="col-lg-6 col-md-6">
+
+          <!-- {% if user.is_member %}
+          sjfhskjhf
+          {% endif %}
+          {% if request.user in Booking.members.all %}
+          hahahahahah
+          {% endif %} -->
+
+
+          <div class="card text-white border-secondary mx-auto mb-5 w-100" style='background-color:rgb(23, 38, 87); '>
+
+
+              <div class="card-body" style='border: 1px solid rgb(23, 38, 87) '>
+                <div class="card-title text-center">
+
+                </div>
+                <div class="card-text">
+                  <h6>Booking Id : {{Booking.id}}</h6>
+
+                  <h6>From : {{Booking.pick_up_point}}</h6>
+                  <h6>To : {{Booking.destination}}</h6>
+                  <h6>created by : {{Booking.created_by}}</h6>
+                  <h6>user : {{Booking.user.username}}</h6>
+                  <h6>Date : {{Booking.date}}</h6>
+                  <h6>Time : {{Booking.time}}</h6>
+                  <h6>user : {{Booking.user.username}}</h6>
+                  <h6>Window for pickup time: {{Booking.window_for_pickup_time}}</h6>
+                  <h6>Ammount of luggage: {{Booking.ammount_of_luggage}}</h6>
+                  <h6>Number of People: {{Booking.number_of_people}}</h6>
+
+                  <br>
+                  <div class="card-link">
+                    <a class="btn btn-primary" href="unbooked/{{ Booking.id }}/" role="button">open for suggestions</a>
+                    <a class="btn btn-danger" href="delete/{{ Booking.id }}/" role="button">delete this Booking</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+{%else%}
+  <h1 class='mt-5' style="text-align:center; color:#00796b;" id='no_Booking'>No Bookings</h1>
+{%endif%}
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+{% endblock %}

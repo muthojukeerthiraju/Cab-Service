@@ -1,1 +1,2 @@
-# Cab-Service
+# Cab-Sharing-Web
+Django based webapp

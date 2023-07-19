@@ -1,0 +1,51 @@
+{% extends 'core/base_accounts.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+logged_out
+{% endblock %}
+
+
+{% block content %}
+<br><br><br>
+<div class="container">
+  <div class="card">
+    <div class="card-header text-center">
+
+      <h1>You are succesfully logged out </h1>
+    </div>
+    <div class="card-body">
+
+      <div class="container text-center">
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+          <div class="text-center">
+            <br>
+              <a class="btn btn-primary" href="{% url 'core:login'  %}" role="button">Go to Login Page</a>
+            <p><strong>-- OR --</strong></p>
+            <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+           <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
+             <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+          </div>
+          <br>
+          <hr>
+          <br>
+          <p class='text-center'>Don't have an account yet? <a href="{% url 'core:signup' %}">SignUp</a></p>
+        </form>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
+<br><br><br>
+{% endblock %}

@@ -1,0 +1,68 @@
+
+
+{% extends 'core/base_user.html' %}
+
+{% load crispy_forms_tags %}
+{% block title %}
+Profile
+{% endblock %}
+
+
+{% block content %}
+<br><br><br><br>
+<div class="container">
+  <div class="card mx-auto" style='width: 30rem;'>
+    <img class='card-img-top  '  style='height:15rem; width: 30rem;' src="{{ user.profile.image.url }}" alt="none">
+    <div class="card-img-overlay">
+
+    </div>
+    <div class="card-body">
+      <div class="card-title text-center">
+        <h2>{{user.username}}</h2>
+        <h2>{{ user.email }}</h2>
+      </div>
+      <div class="card-text">
+        <h6>Email: {{user.email}}</h6>
+        <br>
+        </div>
+
+
+    </div>
+  </div>
+  <br>
+
+
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header text-center">
+
+        <h1>Profile Info</h1>
+      </div>
+
+      <div class="card-body text-center">
+        <div class="container">
+          <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              {{ u_form |crispy  }}<br>
+              {{ p_form |crispy }}<br>
+          </fieldset>
+          <div class="form-group">
+            <a class="btn btn-primary" href="{%url 'core:change_password'%}" role="button">change password</a>
+
+              <button class="btn btn-outline-info" type="submit">Update</button>
+          </div>
+      </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+{% endblock %}

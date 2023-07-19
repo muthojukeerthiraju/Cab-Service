@@ -1,0 +1,84 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet"> -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" style="font-family:'Monoton', cursive; font-size:1.2em;" href="{% url 'core:myBookings' %}">CAB SHARING</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class='navbar-nav mx-auto'>
+      <li class="nav-item active"><a class="nav-link" href="{% url 'core:Booking' %}">Create Booking</a></li>
+      <li class="nav-item active"><a class="nav-link" href="{% url 'core:allBookings' %}">All Bookings</a></li>
+      {% if user.is_authenticated %}
+      <li class="nav-item active"><a class="nav-link" href="{% url 'core:myBookings' %}">My Bookings</a></li>
+      <li class="nav-item active"><a class="nav-link" href="{% url 'core:mydoneBookings' %}">Completed Bookings</a></li>
+      {% endif %}
+
+    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'core:inbox'  %}">Inbox<span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item active">
+             <a class="nav-link" href="{% url 'core:outbox'  %}">Outbox<span class="sr-only">(current)</span></a>
+          </li>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{request.user.username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'core:profile'  %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'core:change_password' %}">Change Password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'core:logout' %}">Logout</a>
+          </div>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'core:logout' %}">Logout<span class="sr-only">(current)</span></a>
+        </li>
+
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'core:login' %}">Login<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'core:signup' %}">Sign Up<span class="sr-only">(current)</span></a>
+        </li>
+
+        {% endif %}
+      </ul>
+
+    </div>
+  </nav>
+
+  {% block content %}
+  {% endblock %}
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<!-- font-family: 'Monoton', cursive; -->
